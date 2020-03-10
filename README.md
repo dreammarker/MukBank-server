@@ -1,1 +1,1 @@
-# MukBank-client
+# MukBank-Server
