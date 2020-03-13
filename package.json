@@ -1,10 +1,10 @@
 {
   "name": "mukbank-server",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production PORT=8001 pm2 start app.js",
+    "start": "NODE_ENV=production PORT=5001 pm2 start app.js",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/codestates/MukBank-server.git"
   },
-  "author": "",
+  "author": "ToNaEat",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/codestates/MukBank-server/issues"

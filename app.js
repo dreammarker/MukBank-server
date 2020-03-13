@@ -1,12 +1,11 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const path = require('path');
-const morgan = require('morgan');
+const fs = require('fs');
 const helmet = require('helmet');
 const hpp = require('hpp');
-const fs = require('fs');
-require('dotenv').config();
+const morgan = require('morgan');
+const path = require('path');
 
 //* router
 const helloRouter = require('./routes/hello');
@@ -40,6 +39,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/hello', helloRouter);
+
+app.use((req, res, next) => {
+  const err = new Error('404 NOT FOUND');
+  err.status = 404;
+  next(err);
+});
+
+// eslint-disable-next-line
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+
+  let sendMessage;
+  if (err.status === 404) {
+    sendMessage = '<h1>404 찾으시는 페이지가 없습니다</h1>';
+  } else {
+    sendMessage = '<h1>서버 에러</h1>';
+  }
+
+  const message =
+    req.app.get('env') === 'development' ? err.message : sendMessage;
+  res.send(message);
+});
 
 app.listen(app.get('port'), () => {
   // eslint-disable-next-line no-console
