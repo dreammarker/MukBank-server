@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const hpp = require('hpp');
 const morgan = require('morgan');
 const path = require('path');
+const logger = require('./logger');
 
 //* router
 const helloRouter = require('./routes/hello');
@@ -43,12 +44,14 @@ app.use('/hello', helloRouter);
 app.use((req, res, next) => {
   const err = new Error('404 NOT FOUND');
   err.status = 404;
+  logger.info('404 error');
   next(err);
 });
 
 // eslint-disable-next-line
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
+  logger.error(err.message);
 
   let sendMessage;
   if (err.status === 404) {
