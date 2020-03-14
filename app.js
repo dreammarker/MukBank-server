@@ -7,12 +7,13 @@ const hpp = require('hpp');
 const morgan = require('morgan');
 const path = require('path');
 const logger = require('./logger');
+const { sequelize } = require('./models');
 
 //* router
 const helloRouter = require('./routes/hello');
 
 const app = express();
-
+sequelize.sync();
 app.set('port', process.env.PORT || 5001);
 
 if (process.env.NODE_ENV === 'production') {
@@ -29,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(
   cors({
     origin: 'http://localhost:3000',
-    methods: 'GET, POST, DELETE, PATCH',
+    methods: 'GET, POST, DELETE, PATCH, OPTIONS',
     credentials: true
   })
 );

@@ -13,7 +13,7 @@ const dailyRotateFileTransport = new transports.DailyRotateFile({
   level: 'error',
   filename: `${logDir}/%DATE%-system.log`,
   datePattern: 'YYYY-MM-DD',
-  // zippedArchive: true,
+  zippedArchive: true,
   maxSize: '20m',
   maxFiles: '14d'
 });
