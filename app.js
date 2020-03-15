@@ -6,14 +6,18 @@ const helmet = require('helmet');
 const hpp = require('hpp');
 const morgan = require('morgan');
 const path = require('path');
+const passport = require('passport');
 const logger = require('./logger');
 const { sequelize } = require('./models');
 
 //* router
 const helloRouter = require('./routes/hello');
+const authRouter = require('./routes/auth');
+const passportConfig = require('./passport');
 
 const app = express();
 sequelize.sync();
+passportConfig(passport);
 app.set('port', process.env.PORT || 5001);
 
 if (process.env.NODE_ENV === 'production') {
@@ -39,8 +43,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(passport.initialize());
 
 app.use('/hello', helloRouter);
+app.use('/auth', authRouter);
 
 app.use((req, res, next) => {
   const err = new Error('404 NOT FOUND');
