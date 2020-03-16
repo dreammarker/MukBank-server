@@ -16,6 +16,7 @@ const sequelize = new Sequelize(
 //* models
 db.User = require('./user')(sequelize, Sequelize);
 db.Restaurant = require('./restaurant')(sequelize, Sequelize);
+db.FoodMain = require('./food_main')(sequelize, Sequelize);
 db.FoodCategory = require('./food_category')(sequelize, Sequelize);
 
 db.UserAgeSta = require('./user_age_statics')(sequelize, Sequelize);
@@ -42,11 +43,11 @@ db.User.belongsToMany(db.Restaurant, {
   otherKey: 'rest_id'
 });
 
-//* User -< UserHateFood >- FoodCategory
-db.User.belongsToMany(db.FoodCategory, {
+//* User -< UserHateFood >- FoodMain
+db.User.belongsToMany(db.FoodMain, {
   through: db.UserHateFood,
   foreignKey: 'user_id',
-  otherKey: 'fd_category_id'
+  otherKey: 'fd_main_id'
 });
 
 //* User -< UserAgeSta
