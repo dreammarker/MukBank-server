@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       freezeTable: true,
       tableName: 'user_hate_food',
       timeStamps: true,
-      paranoid: true
+      paranoid: false
     }
   );
 
