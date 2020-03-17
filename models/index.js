@@ -43,11 +43,11 @@ db.User.belongsToMany(db.Restaurant, {
   otherKey: 'rest_id'
 });
 
-//* User -< UserHateFood >- FoodMain
-db.User.belongsToMany(db.FoodMain, {
+//* User -< UserHateFood >- FoodCategory
+db.User.belongsToMany(db.FoodCategory, {
   through: db.UserHateFood,
   foreignKey: 'user_id',
-  otherKey: 'fd_main_id'
+  otherKey: 'fd_category_id'
 });
 
 //* User -< UserAgeSta
