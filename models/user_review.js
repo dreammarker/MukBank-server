@@ -17,15 +17,31 @@ module.exports = (sequelize, DataTypes) => {
       score: {
         type: DataTypes.INTEGER,
         allowNull: false
+
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        foreignKey: true
+      },
+      rest_id: {
+        type: DataTypes.INTEGER,
+        foreignKey: true,
+        allowNull: false
       }
     },
+
+    },
     {
-      freezeTableName: true,
-      tableName: 'user_review',
       timeStamps: true,
       paranoid: true
     }
   );
+
+  UserReview.associate = function(models) {
+    UserReview.belongsTo(models.user, { foreignKey: 'user_id' });
+    UserReview.belongsTo(models.restaurant, { foreignKey: 'rest_id' });
+  };
 
   return UserReview;
 };
