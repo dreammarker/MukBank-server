@@ -11,11 +11,14 @@ module.exports = (sequelize, DataTypes) => {
       location: {
         type: DataTypes.STRING(250),
         allowNull: false
+
       },
       user_id: {
         type: DataTypes.INTEGER,
         foreignKey: true
       }
+    },
+
     },
     {
       timeStapms: true,
@@ -23,8 +26,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+
   UserLocationSta.associate = function(model) {
     UserLocationSta.belongsTo(model.user, { foreignKey: 'user_id' });
   };
+
   return UserLocationSta;
 };

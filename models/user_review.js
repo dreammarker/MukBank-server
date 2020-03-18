@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       score: {
         type: DataTypes.INTEGER,
         allowNull: false
+
       },
       user_id: {
         type: DataTypes.INTEGER,
@@ -29,11 +30,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       }
     },
+
+    },
     {
       timeStamps: true,
       paranoid: true
     }
   );
+
   UserReview.associate = function(models) {
     UserReview.belongsTo(models.user, { foreignKey: 'user_id' });
     UserReview.belongsTo(models.restaurant, { foreignKey: 'rest_id' });

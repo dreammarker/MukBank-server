@@ -17,16 +17,19 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: true
       }
     },
+    },
     {
       timeStamps: true,
       paranoid: false
     }
   );
+
   UserHateFood.associate = function(models) {
     UserHateFood.belongsTo(models.user, { foreignKey: 'user_id' });
     UserHateFood.belongsTo(models.food_category, {
       foreignKey: 'fd_category_id'
     });
   };
+
   return UserHateFood;
 };

@@ -12,13 +12,17 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: true
       }
     },
+
+    },
     {
       timeStapms: true,
       paranoid: true
     }
   );
+
   UserGenderSta.associate = function(model) {
     UserGenderSta.belongsTo(model.user, { foreignKey: 'user_id' });
   };
+  
   return UserGenderSta;
 };

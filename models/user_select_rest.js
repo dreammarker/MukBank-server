@@ -25,14 +25,20 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
+
+      }
+    },
+    {
       timeStamps: true,
       paranoid: true
     }
   );
+
   UserSelectRest.associate = function(models) {
     UserSelectRest.belongsTo(models.user, { foreignKey: 'user_id' });
     UserSelectRest.belongsTo(models.restaurant, { foreignKey: 'rest_id' });
   };
+
 
   return UserSelectRest;
 };
