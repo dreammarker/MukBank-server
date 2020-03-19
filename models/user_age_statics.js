@@ -6,15 +6,22 @@ module.exports = (sequelize, DataTypes) => {
       count: {
         type: DataTypes.INTEGER,
         allowNull: false
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        foreignKey: true
       }
     },
+    },
     {
-      freezeTable: true,
-      tableName: 'user_age_statics',
       timeStamps: true,
       paranoid: true
     }
   );
 
+  UserAgeSta.associate = function(model) {
+    UserAgeSta.belongsTo(model.user, { foreignKey: 'user_id' });
+  };
+  
   return UserAgeSta;
 };

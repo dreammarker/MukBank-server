@@ -2,6 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const Restaurant = sequelize.define(
     'restaurant',
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true
+      },
       name: {
         type: DataTypes.STRING(250),
         allowNull: false
@@ -41,15 +45,31 @@ module.exports = (sequelize, DataTypes) => {
       ymap: {
         type: DataTypes.STRING(250),
         allowNull: true
+      },
+      latitude: {
+        type: DataTypes.STRING(250),
+        allowNull: true
+      },
+      longtitude: {
+        type: DataTypes.STRING(250),
+        allowNull: true
+      },
+      fd_category_id: {
+        type: DataTypes.INTEGER,
+        foreignKey: true
       }
     },
     {
-      freezeTableName: true,
-      tableName: 'restaurant',
       timeStamps: true,
       paranoid: true
     }
   );
-
+  Restaurant.associate = function(models) {
+    Restaurant.hasMany(models.user_select_rest, { foreignKey: 'id' });
+    Restaurant.hasMany(models.user_review, { foreignKey: 'id' });
+    Restaurant.belongsTo(models.food_category, {
+      foreignKey: 'fd_category_id'
+    });
+  };
   return Restaurant;
 };
