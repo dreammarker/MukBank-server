@@ -31,9 +31,10 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   app.use(morgan('dev'));
 }
+
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:19001', // 19000 ~ 19010
     methods: 'GET, POST, DELETE, PATCH, OPTIONS',
     credentials: true
   })
