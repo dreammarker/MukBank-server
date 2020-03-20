@@ -1,5 +1,5 @@
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const { User } = require('../models');
+const { user } = require('../models');
 
 module.exports = passport => {
   passport.use(
@@ -12,17 +12,21 @@ module.exports = passport => {
       async (accessToken, refreshToken, profile, done) => {
         console.log('profile~~: ', profile);
         try {
-          const exUser = await User.findOne({
-            where: { snsId: profile.id, provider: 'google' }
+          const exUser = await user.findOne({
+            where: {
+              snsId: profile.id,
+              provider: profile.provider,
+              email: profile._json.email
+            }
           });
           if (exUser) {
             done(null, exUser);
           } else {
-            const newUser = await User.create({
+            const newUser = await user.create({
               nick: profile.displayName,
               snsId: profile.id,
               email: profile._json.email,
-              provider: 'google'
+              provider: profile.provider
             });
             done(null, newUser);
           }

@@ -7,15 +7,25 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        foreignKey: true
+      },
+      fd_category: {
+        type: DataTypes.STRING
       }
     },
+
     {
-      freezeTable: true,
-      tableName: 'user_hate_food',
       timeStamps: true,
       paranoid: false
     }
   );
+
+  UserHateFood.associate = function(models) {
+    UserHateFood.belongsTo(models.user, { foreignKey: 'user_id' });
+  };
 
   return UserHateFood;
 };

@@ -2,6 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const FoodCategory = sequelize.define(
     'food_category',
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true
+      },
       parent: {
         type: DataTypes.STRING(100),
         allowNull: true
@@ -33,12 +37,13 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
-      freezeTableName: true,
-      tableName: 'food_category',
       timeStampls: true,
       paranoid: true
     }
   );
+  FoodCategory.associate = function(models) {
+    FoodCategory.hasMany(models.restaurant, { foreignKey: 'id' });
+  };
 
   return FoodCategory;
 };

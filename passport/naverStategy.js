@@ -1,29 +1,31 @@
-const FacebookStrategy = require('passport-facebook').Strategy;
+const NaverStrategy = require('passport-naver').Strategy;
 const { user } = require('../models');
 
 module.exports = passport => {
   passport.use(
-    new FacebookStrategy(
+    new NaverStrategy(
       {
-        clientID: process.env.FACEBOOK_ID,
-        clientSecret: process.env.FACEBOOK_SECRET,
-        callbackURL: '/auth/facebook/callback',
-        profileFields: ['id', 'displayName', 'email', 'name']
+        clientID: process.env.NAVER_ID,
+        clientSecret: process.env.NAVER_SECRET,
+        callbackURL: '/auth/naver/callback'
       },
       async (accessToken, refreshToken, profile, done) => {
-        console.log('face profile~~: ', profile);
+        console.log('profile!!: ', profile);
         try {
           const exUser = await user.findOne({
-            where: { snsId: profile.id, provider: 'facebook' }
+            where: {
+              snsId: profile.id,
+              provider: profile.provider,
+              email: profile._json.email
+            }
           });
           if (exUser) {
             done(null, exUser);
           } else {
             const newUser = await user.create({
-              nick: profile.displayName,
-              snsId: profile.id,
               email: profile._json.email,
-              provider: 'facebook'
+              snsId: profile.id,
+              provider: profile.provider
             });
             done(null, newUser);
           }
