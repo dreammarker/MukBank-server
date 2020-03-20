@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: true
       }
     },
+
     {
       timeStamps: true,
       paranoid: true

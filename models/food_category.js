@@ -2,7 +2,6 @@ module.exports = (sequelize, DataTypes) => {
   const FoodCategory = sequelize.define(
     'food_category',
     {
-
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true
