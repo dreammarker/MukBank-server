@@ -24,10 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       }
     },
-    {
 
-      }
-    },
     {
       timeStamps: true,
       paranoid: true
@@ -38,7 +35,6 @@ module.exports = (sequelize, DataTypes) => {
     UserSelectRest.belongsTo(models.user, { foreignKey: 'user_id' });
     UserSelectRest.belongsTo(models.restaurant, { foreignKey: 'rest_id' });
   };
-
 
   return UserSelectRest;
 };
