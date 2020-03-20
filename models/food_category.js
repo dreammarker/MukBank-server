@@ -43,8 +43,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   FoodCategory.associate = function(models) {
-    FoodCategory.hasMany(models.restaurant);
-    FoodCategory.hasMany(models.user_hate_food);
+    FoodCategory.hasMany(models.restaurant, { foreignKey: 'id' });
   };
 
   return FoodCategory;

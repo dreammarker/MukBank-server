@@ -14,6 +14,7 @@ const { sequelize } = require('./models');
 const helloRouter = require('./routes/hello');
 const authRouter = require('./routes/auth');
 const passportConfig = require('./passport');
+const restaurantRouter = require('./routes/restaurant');
 
 const app = express();
 sequelize.sync();
@@ -48,6 +49,12 @@ app.use(passport.initialize());
 
 app.use('/hello', helloRouter);
 app.use('/auth', authRouter);
+app.use('/restaurant', restaurantRouter);
+
+app.get('/logout', function(req, res) {
+  res.clearCookie('loginobj');
+  res.redirect('/');
+});
 
 app.use((req, res, next) => {
   const err = new Error('404 NOT FOUND');
