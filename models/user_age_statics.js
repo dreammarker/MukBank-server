@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: true
       }
     },
-    },
     {
       timeStamps: true,
       paranoid: true
@@ -22,6 +21,6 @@ module.exports = (sequelize, DataTypes) => {
   UserAgeSta.associate = function(model) {
     UserAgeSta.belongsTo(model.user, { foreignKey: 'user_id' });
   };
-  
+
   return UserAgeSta;
 };

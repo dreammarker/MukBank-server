@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
       score: {
         type: DataTypes.INTEGER,
         allowNull: false
-
       },
       user_id: {
         type: DataTypes.INTEGER,
@@ -29,8 +28,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: true,
         allowNull: false
       }
-    },
-
     },
     {
       timeStamps: true,

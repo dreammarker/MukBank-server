@@ -1,5 +1,6 @@
 const restdistance = require('./restdistance');
-
+const fdcategory = require('./fdcategory');
 module.exports = {
-  restdistance
+  restdistance,
+  fdcategory
 };

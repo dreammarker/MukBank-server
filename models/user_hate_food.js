@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING
       }
     },
-    },
     {
       timeStamps: true,
       paranoid: false
