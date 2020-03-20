@@ -6,8 +6,8 @@ const { ExtractJwt } = passportJWT;
 const google = require('./googleStrategy');
 const kakao = require('./kakaoStrategy');
 const facebook = require('./facebookStrategy');
-
-const { User } = require('../models');
+const naver = require('./naverStategy');
+const { user } = require('../models');
 require('dotenv').config();
 
 const opts = {};
@@ -20,7 +20,8 @@ module.exports = passport => {
   passport.use(
     new JwtStrategy(opts, (jwtPayload, done) => {
       console.log('pay~~~===========================', jwtPayload);
-      User.findById(jwtPayload.id)
+      user
+        .findById(jwtPayload.id)
         .then(user => {
           if (user) {
             return done(null, user);
@@ -34,4 +35,5 @@ module.exports = passport => {
   google(passport);
   kakao(passport);
   facebook(passport);
+  naver(passport);
 };
