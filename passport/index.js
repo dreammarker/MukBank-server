@@ -6,7 +6,7 @@ const { ExtractJwt } = passportJWT;
 const google = require('./googleStrategy');
 const kakao = require('./kakaoStrategy');
 const facebook = require('./facebookStrategy');
-const naver = require('./naverStategy');
+// const naver = require('./naverStategy');
 const { user } = require('../models');
 require('dotenv').config();
 
@@ -35,5 +35,5 @@ module.exports = passport => {
   google(passport);
   kakao(passport);
   facebook(passport);
-  naver(passport);
+  // naver(passport);
 };

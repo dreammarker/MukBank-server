@@ -36,7 +36,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true
       },
 
-      //? string??
       xmap: {
         type: DataTypes.STRING(250),
         allowNull: true
