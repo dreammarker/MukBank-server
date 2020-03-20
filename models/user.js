@@ -2,6 +2,11 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     'user',
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
       email: {
         type: DataTypes.STRING(250),
         allowNull: true
@@ -30,15 +35,30 @@ module.exports = (sequelize, DataTypes) => {
       gender: {
         type: DataTypes.STRING(100),
         allowNull: true
+      },
+      userimage: {
+        type: DataTypes.STRING,
+        allowNull: true
       }
     },
     {
-      freezeTableName: true,
-      tableName: 'user',
       timestamps: true,
       paranoid: true
     }
   );
-
+  User.associate = function(models) {
+    //유저랑 age랑 1: n연결
+    User.hasMany(models.user_age_statics, { foreignKey: 'id' });
+    //유저랑 gender 1: n 연결
+    User.hasMany(models.user_gender_statics, { foreignKey: 'id' });
+    //유저랑 location 1:n 연결
+    User.hasMany(models.user_location_statics, { foreignKey: 'id' });
+    //유저랑 review select
+    User.hasMany(models.user_review, { foreignKey: 'id' });
+    //유저랑 user_review
+    User.hasMany(models.user_select_rest, { foreignKey: 'id' });
+    //유저랑 user_hate_food
+    User.hasMany(models.user_hate_food, { foreignKey: 'id' });
+  };
   return User;
 };

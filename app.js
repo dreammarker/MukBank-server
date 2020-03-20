@@ -14,6 +14,7 @@ const { sequelize } = require('./models');
 const helloRouter = require('./routes/hello');
 const authRouter = require('./routes/auth');
 const passportConfig = require('./passport');
+const restaurantRouter = require('./routes/restaurant');
 
 const app = express();
 sequelize.sync();
@@ -31,9 +32,10 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   app.use(morgan('dev'));
 }
+
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:19001', // 19000 ~ 19010
     methods: 'GET, POST, DELETE, PATCH, OPTIONS',
     credentials: true
   })
@@ -47,6 +49,12 @@ app.use(passport.initialize());
 
 app.use('/hello', helloRouter);
 app.use('/auth', authRouter);
+app.use('/restaurant', restaurantRouter);
+
+app.get('/logout', function(req, res) {
+  res.clearCookie('loginobj');
+  res.redirect('/');
+});
 
 app.use((req, res, next) => {
   const err = new Error('404 NOT FOUND');

@@ -5,51 +5,55 @@ const router = express.Router();
 
 const { authController } = require('../controller');
 
-router.get('/', authController.info.get);
+//router.get('/', authController.info.get);
+//구글 같은 경우는 인증정보만 가져와서 값만 넘겨주면 된다.
+router.post('/google/signin', authController.google.signin);
+// //* kakao
+// router.get('/kakao', passport.authenticate('kakao'));
 
-//* google
-router.get(
-  '/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
+// router.get(
+//   '/kakao/callback',
+//   passport.authenticate('kakao', {
+//     failureRedirect: 'http://localhost:5001/auth',
+//     session: false
+//   }),
+//   authController.kakao.get
+// );
 
-router.get(
-  '/google/callback',
-  passport.authenticate('google', {
-    failureRedirect: 'http://localhost:5001/auth',
-    session: false
-  }),
-  authController.google.get
-);
+// //* facebook
+// router.get(
+//   '/facebook',
+//   passport.authenticate('facebook', {
+//     // https://developers.facebook.com/docs/facebook-login/permissions/?translation#reference-default
+//     scope: ['email', 'user_age_range', 'user_gender']
+//   })
+// );
 
-//* kakao
-router.get('/kakao', passport.authenticate('kakao'));
+// router.get(
+//   '/facebook/callback',
+//   passport.authenticate('facebook', {
+//     failureRedirect: 'http://localhost:5001/auth',
+//     session: false
+//   }),
+//   authController.facebook.get
+// );
 
-router.get(
-  '/kakao/callback',
-  passport.authenticate('kakao', {
-    failureRedirect: 'http://localhost:5001/auth',
-    session: false
-  }),
-  authController.kakao.get
-);
+// //* naver
+// router.get(
+//   '/naver',
+//   passport.authenticate('naver', {
+//     // https://developers.facebook.com/docs/facebook-login/permissions/?translation#reference-default
+//     scope: ['email', 'user_age_range', 'user_gender']
+//   })
+// );
 
-//* facebook
-router.get(
-  '/facebook',
-  passport.authenticate('facebook', {
-    // https://developers.facebook.com/docs/facebook-login/permissions/?translation#reference-default
-    scope: ['email', 'user_age_range', 'user_gender']
-  })
-);
-
-router.get(
-  '/facebook/callback',
-  passport.authenticate('facebook', {
-    failureRedirect: 'http://localhost:5001/auth',
-    session: false
-  }),
-  authController.facebook.get
-);
+// router.get(
+//   '/naver/callback',
+//   passport.authenticate('naver', {
+//     failureRedirect: 'http://localhost:5001/auth',
+//     session: false
+//   }),
+//   authController.naver.get
+// );
 
 module.exports = router;

@@ -110,7 +110,7 @@ typings/
 # dotenv environment variables file
 .env
 
-
+/config/google.json
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db

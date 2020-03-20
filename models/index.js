@@ -1,80 +1,40 @@
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
 const Sequelize = require('sequelize');
-
+const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-
-const config = require('../config/config')[env];
-
+const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
-const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  config
-);
+let sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+  );
+}
 
-//* models
-db.User = require('./user')(sequelize, Sequelize);
-db.Restaurant = require('./restaurant')(sequelize, Sequelize);
-db.FoodMain = require('./food_main')(sequelize, Sequelize);
-db.FoodCategory = require('./food_category')(sequelize, Sequelize);
+fs.readdirSync(__dirname)
+  .filter(file => {
+    return (
+      file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
+    );
+  })
+  .forEach(file => {
+    const model = sequelize['import'](path.join(__dirname, file));
+    db[model.name] = model;
+  });
 
-db.UserAgeSta = require('./user_age_statics')(sequelize, Sequelize);
-db.UserGenderSta = require('./user_gender_statics')(sequelize, Sequelize);
-db.UserLocationSta = require('./user_location_statics')(sequelize, Sequelize);
-
-db.UserSelectRest = require('./user_select_rest')(sequelize, Sequelize);
-db.UserReview = require('./user_review')(sequelize, Sequelize);
-db.UserHateFood = require('./user_hate_food')(sequelize, Sequelize);
-
-//* assosiation
-
-//* User -< UserSelectRest >- Restaurant
-db.User.belongsToMany(db.Restaurant, {
-  through: db.UserSelectRest,
-  foreignKey: 'user_id',
-  otherKey: 'rest_id'
-});
-
-//* User -< UserReview >- Restaurant
-db.User.belongsToMany(db.Restaurant, {
-  through: db.UserReview,
-  foreignKey: 'user_id',
-  otherKey: 'rest_id'
-});
-
-//* User -< UserHateFood >- FoodCategory
-db.User.belongsToMany(db.FoodCategory, {
-  through: db.UserHateFood,
-  foreignKey: 'user_id',
-  otherKey: 'fd_category_id'
-});
-
-//* User -< UserAgeSta
-db.User.hasMany(db.UserAgeSta, {
-  foreignKey: 'user_id'
-});
-
-db.UserAgeSta.belongsTo(db.User, {
-  foreignKey: 'user_id'
-});
-
-//* User -< UserGenderSta
-db.User.hasMany(db.UserGenderSta, {
-  foreignKey: 'user_id'
-});
-
-db.UserGenderSta.belongsTo(db.User, {
-  foreignKey: 'user_id'
-});
-
-//* User -< UserLocationSta
-db.User.hasMany(db.UserLocationSta, {
-  foreignKey: 'user_id'
-});
-
-db.UserLocationSta.belongsTo(db.User, {
-  foreignKey: 'user_id'
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
 });
 
 db.sequelize = sequelize;
