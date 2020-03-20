@@ -1,6 +1,7 @@
 const { sequelize } = require('../../models/index');
 const { QueryTypes } = require('sequelize');
 module.exports = {
+  //식당정보 및 카페정보 보여주기 식당정보는 사용자가 싫어하는 분류를 필터해서 보여줄수 있다.
   post: async (req, res) => {
     let latitude = req.body.latitude; //짧은게 latitude
     let longitude = req.body.longitude; //긴게 longitude
