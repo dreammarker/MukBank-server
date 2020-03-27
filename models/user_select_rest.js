@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       }
     },
+
     {
       timeStamps: true,
       paranoid: true
