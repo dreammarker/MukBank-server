@@ -9,7 +9,9 @@ const { authController } = require('../controller');
 //구글 같은 경우는 인증정보만 가져와서 값만 넘겨주면 된다.
 router.post('/google/signin', authController.google.signin);
 // //* kakao
-// router.get('/kakao', passport.authenticate('kakao'));
+router.get('/kakao', authController.kakao.access);
+
+router.get('/kakao/callback', authController.kakao.callback);
 
 // router.get(
 //   '/kakao/callback',
