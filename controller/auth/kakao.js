@@ -56,7 +56,7 @@ module.exports = {
     let userobject = {};
     userobject['email'] = email;
     userobject['snsid'] = snsid;
-    userobject['provider'] = 'google';
+    userobject['provider'] = 'kakao';
     userobject['userimage'] = userimage;
     userobject['nick'] = nick;
     console.log(userobject);

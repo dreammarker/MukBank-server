@@ -12,7 +12,9 @@ router.post('/google/signin', authController.google.signin);
 router.post('/kakao/signin', authController.kakao.signin);
 
 // //* kakao
-// router.get('/kakao', passport.authenticate('kakao'));
+router.get('/kakao', authController.kakao.access);
+
+router.get('/kakao/callback', authController.kakao.callback);
 
 // router.get(
 //   '/kakao/callback',
