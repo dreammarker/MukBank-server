@@ -34,14 +34,14 @@ if (process.env.NODE_ENV === 'production') {
   app.use(morgan('dev'));
 }
 
-app.use(cors());
-// app.use(
-//   cors({
-//     origin: 'http://localhost:19001', // 19000 ~ 19010
-//     methods: 'GET, POST, DELETE, PATCH, OPTIONS',
-//     credentials: true
-//   })
-// );
+// app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:19001', // 19000 ~ 19010
+    methods: 'GET, POST, DELETE, PATCH, OPTIONS',
+    credentials: true
+  })
+);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
