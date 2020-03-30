@@ -7,7 +7,8 @@ module.exports = {
   post: async (req, res) => {
     let hatefd = req.body.hatefd;
     //토근을 가져온다.
-    let loginobj = req.cookies.loginobj;
+    // let loginobj = req.cookies.loginobj;
+    let loginobj = req.headers.authorization.split(' ')[1];
 
     //토근을 가지고
     let userobj = jwt.verify(loginobj, process.env.JWT_KEY).data;
@@ -39,7 +40,7 @@ module.exports = {
     res.send('sucees');
   },
   get: async (req, res) => {
-    let loginobj = req.cookies.loginobj;
+    let loginobj = req.headers.authorization.split(' ')[1];
 
     //토근을 가지고
     let userobj = jwt.verify(loginobj, process.env.JWT_KEY).data;
