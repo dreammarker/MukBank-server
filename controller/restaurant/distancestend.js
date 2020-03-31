@@ -37,6 +37,7 @@ module.exports = {
 
     let query =
       '  SELECT                 ' +
+      ' rest.id                 ' +
       ' rest.name,              ' +
       ' rest.address,           ' +
       ' rest.phone,             ' +
