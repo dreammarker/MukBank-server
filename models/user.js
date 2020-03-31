@@ -48,17 +48,17 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.associate = function(models) {
     //유저랑 age랑 1: n연결
-    User.hasMany(models.user_age_statics, { foreignKey: 'id' });
+    User.hasMany(models.user_age_statics);
     //유저랑 gender 1: n 연결
-    User.hasMany(models.user_gender_statics, { foreignKey: 'id' });
+    User.hasMany(models.user_gender_statics);
     //유저랑 location 1:n 연결
-    User.hasMany(models.user_location_statics, { foreignKey: 'id' });
+    User.hasMany(models.user_location_statics);
     //유저랑 review select
-    User.hasMany(models.user_review, { foreignKey: 'id' });
+    User.hasMany(models.user_review);
     //유저랑 user_review
-    User.hasMany(models.user_select_rest, { foreignKey: 'id' });
+    User.hasMany(models.user_select_rest);
     //유저랑 user_hate_food
-    User.hasMany(models.user_hate_food, { foreignKey: 'id' });
+    User.hasMany(models.user_hate_food);
   };
   return User;
 };

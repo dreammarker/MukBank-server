@@ -64,12 +64,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Restaurant.associate = function(models) {
-    Restaurant.hasMany(models.user_select_rest, { foreignKey: 'id' });
-    Restaurant.hasMany(models.user_review, { foreignKey: 'id' });
+    Restaurant.hasMany(models.user_select_rest);
+    Restaurant.hasMany(models.user_review);
     Restaurant.belongsTo(models.food_category, {
       foreignKey: 'fd_category_id'
     });
-    Restaurant.hasOne(models.restaurant_detail, { foreignKey: 'id' });
+    Restaurant.hasOne(models.restaurant_detail);
   };
   return Restaurant;
 };
