@@ -28,6 +28,7 @@ module.exports = {
       res.send('올바른 좌표값이 아닙니다.');
     } else {
       const token = req.headers.authorization.split(' ')[1];
+      // console.log('token~~~~,', token);
       const userobj = jwt.verify(token, process.env.JWT_KEY).data;
       let location_data = location.documents[0].address.address_name;
       //유저를 체크 한다... 지역+user유저 체크
@@ -49,6 +50,7 @@ module.exports = {
             }
           }
         );
+        res.send('update success');
       } else {
         //create
         user_location_statics.create({
@@ -56,6 +58,7 @@ module.exports = {
           location: location_data,
           count: 1
         });
+        res.send('create success');
       }
     }
   }
