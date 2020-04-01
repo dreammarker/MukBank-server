@@ -43,6 +43,7 @@ module.exports = {
       ' rest.roadAddress,       ' +
       ' rest.latitude,          ' +
       ' rest.longitude,         ' +
+      ' rest.image,             ' +
       ' fd_category.firstchild, ' +
       ' fd_category.secondchild,' +
       ' fd_category.parent      ,' +
@@ -153,12 +154,14 @@ module.exports = {
     }
     let query =
       '  SELECT                 ' +
+      ' rest.id  ,              ' +
       ' rest.name,              ' +
       ' rest.address,           ' +
       ' rest.phone,             ' +
       ' rest.roadAddress,       ' +
       ' rest.latitude,          ' +
       ' rest.longitude,         ' +
+      ' rest.image,             ' +
       ' fd_category.firstchild, ' +
       ' fd_category.secondchild,' +
       ' fd_category.parent      ,' +

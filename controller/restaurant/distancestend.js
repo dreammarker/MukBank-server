@@ -44,6 +44,7 @@ module.exports = {
       ' rest.roadAddress,       ' +
       ' rest.latitude,          ' +
       ' rest.longitude,         ' +
+      ' rest.image,             ' +
       ' fd_category.firstchild, ' +
       ' fd_category.secondchild,' +
       ' fd_category.parent      ,' +
