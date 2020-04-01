@@ -59,6 +59,9 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.user_select_rest);
     //유저랑 user_hate_food
     User.hasMany(models.user_hate_food);
+    //유저랑 user_like
+    User.hasMany(models.user_like, { as: 'user_like' });
   };
+
   return User;
 };

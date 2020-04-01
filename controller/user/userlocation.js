@@ -29,7 +29,7 @@ module.exports = {
     } else {
       const token = req.headers.authorization.split(' ')[1];
       const userobj = jwt.verify(token, process.env.JWT_KEY).data;
-      let location_data = location.documents.address.address_name;
+      let location_data = location.documents[0].address.address_name;
       //유저를 체크 한다... 지역+user유저 체크
       let usercheck = await user_location_statics.findOne({
         where: {

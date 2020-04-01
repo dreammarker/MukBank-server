@@ -70,6 +70,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'fd_category_id'
     });
     Restaurant.hasOne(models.restaurant_detail);
+    Restaurant.hasMany(models.user_like, { as: 'user_like' });
   };
   return Restaurant;
 };
