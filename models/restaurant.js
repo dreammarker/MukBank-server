@@ -69,8 +69,6 @@ module.exports = (sequelize, DataTypes) => {
     Restaurant.belongsTo(models.food_category, {
       foreignKey: 'fd_category_id'
     });
-    Restaurant.hasOne(models.restaurant_detail);
-    Restaurant.hasMany(models.user_like, { as: 'user_like' });
   };
   return Restaurant;
 };
