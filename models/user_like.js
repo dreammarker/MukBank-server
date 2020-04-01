@@ -1,4 +1,5 @@
 //* 다대다 테이블
+'use strict';
 module.exports = (sequelize, DataTypes) => {
   const UserLike = sequelize.define(
     'user_like',
@@ -11,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         foreignKey: true
       },
-      check: {
+      likecheck: {
         type: DataTypes.BOOLEAN
       }
     },
