@@ -36,7 +36,7 @@ module.exports = {
               }
             }
           );
-          res.send('update');
+          res.send({ likecheck: check });
         } else {
           //없다면 없을떄 클릭했으므로...
           user_like.create({
@@ -45,7 +45,7 @@ module.exports = {
             likecheck: 1
           });
 
-          res.send('create');
+          res.send({ likecheck: true });
         }
       } else {
         console.log('wrong');
