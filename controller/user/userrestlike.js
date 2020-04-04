@@ -71,10 +71,10 @@ module.exports = {
             }
           })
           .then(result => {
-            return result.dataValues;
+            return result;
           });
         if (usercheck) {
-          res.send(usercheck.likecheck);
+          res.send(usercheck.dataValues.likecheck);
         } else {
           res.status(400).send(false);
         }
