@@ -17,6 +17,10 @@ module.exports = {
         });
         res.send(result);
       })
+      .catch(err => {
+        console.log(err);
+        res.send('fdcategory error');
+      })
       .catch(result => {
         res.status(500);
         res.send('잘못된 접근입니다.');
