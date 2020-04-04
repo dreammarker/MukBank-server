@@ -17,7 +17,11 @@ module.exports = {
           type: QueryTypes.SELECT
         })
         .then(result => {
-          res.send(result[0]);
+          if (result) {
+            res.send(result[0]);
+          } else {
+            res.send(false);
+          }
         })
         .catch(err => {
           console.log(err);
