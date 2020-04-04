@@ -21,6 +21,7 @@ module.exports = {
         query += ' join food_categories as fd on rest.fd_category_id = fd.id';
         query += ' where likes.user_id=' + userobj.id;
         query += ' and parent = ' + "'" + parent + "'";
+        query += ' and likes.likecheck=true';
 
         let likedata = await sequelize
           .query(query, {
