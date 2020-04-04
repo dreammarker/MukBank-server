@@ -72,6 +72,10 @@ module.exports = {
           })
           .then(result => {
             return result;
+          })
+          .catch(err => {
+            console.log(err);
+            res.send('usercheck sql error');
           });
         if (usercheck) {
           res.send(usercheck.dataValues.likecheck);

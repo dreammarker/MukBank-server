@@ -13,6 +13,10 @@ module.exports = {
         })
         .then(result => {
           res.send(result);
+        })
+        .catch(err => {
+          console.log(err);
+          res.end('restdeatil.sql error');
         });
     } catch {
       res.send('error');
