@@ -55,5 +55,35 @@ module.exports = {
       console.log(err);
       res.send('failed');
     }
+  },
+  get: async (req, res) => {
+    try {
+      const token = req.headers.authorization.split(' ')[1];
+      const userobj = jwt.verify(token, process.env.JWT_KEY).data;
+      const rest_id = req.body.rest_id;
+      //user정보 가져오기..
+      if (userobj.id) {
+        let usercheck = await user_like
+          .findOne({
+            where: {
+              user_id: userobj.id,
+              rest_id: rest_id
+            }
+          })
+          .then(result => {
+            return result.dataValues;
+          });
+        if (usercheck) {
+          res.send(usercheck.likecheck);
+        } else {
+          res.status(400).send(false);
+        }
+      } else {
+        res.status(400).send('userid가 없습니다.');
+      }
+    } catch (err) {
+      console.log(err);
+      res.send('failed');
+    }
   }
 };
