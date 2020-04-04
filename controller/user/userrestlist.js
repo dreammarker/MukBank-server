@@ -15,7 +15,7 @@ module.exports = {
       }
       if (userobj.id) {
         let query =
-          ' SELECT user_id,rest_id, name,latitude,longitude,fd.parent as parent ,likecheck, rest.image ';
+          ' SELECT user_id,rest_id, name,latitude,longitude,fd.parent as parent ,likecheck, rest.image ,fd.firstchild as firstchild, fd.secondchild as secondchild , rest.address as address   ';
         query += ' FROM mukbank.user_likes as likes ';
         query += ' join restaurants as rest on likes.rest_id = rest.id ';
         query += ' join food_categories as fd on rest.fd_category_id = fd.id';
