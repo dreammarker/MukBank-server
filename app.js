@@ -15,6 +15,7 @@ const helloRouter = require('./routes/hello');
 const authRouter = require('./routes/auth');
 const passportConfig = require('./passport');
 const restaurantRouter = require('./routes/restaurant');
+const userRouter = require('./routes/user');
 
 const app = express();
 sequelize.sync();
@@ -33,6 +34,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(morgan('dev'));
 }
 
+// app.use(cors());
 app.use(
   cors({
     origin: 'http://localhost:19001', // 19000 ~ 19010
@@ -50,6 +52,7 @@ app.use(passport.initialize());
 app.use('/hello', helloRouter);
 app.use('/auth', authRouter);
 app.use('/restaurant', restaurantRouter);
+app.use('/user', userRouter);
 
 app.get('/logout', function(req, res) {
   res.clearCookie('loginobj');

@@ -48,9 +48,9 @@ module.exports = {
         data: exUser.dataValues
       },
       process.env.JWT_KEY,
-      { expiresIn: 60000 }
+      { expiresIn: '24h' } // default는 ms 입니다.
     );
-    res.cookie('loginobj', token);
-    res.send();
+    // res.cookie('loginobj', token);
+    res.json({ jwt: token });
   }
 };
