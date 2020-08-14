@@ -14,7 +14,7 @@ dist/
 .floobit
 .floo
 .flooignore
-
+.google.template
 ### macOS ###
 *.DS_Store
 .AppleDouble
